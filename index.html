@@ -75,7 +75,6 @@
   .mark{font-family:var(--font),sans-serif;font-weight:700;letter-spacing:-.03em;line-height:1;display:inline-flex;align-items:center;white-space:nowrap}
   .mark .go{color:var(--g)} .mark .ag{color:var(--b)}
   .stage.dark .mark .go{color:var(--gGlow)} .stage.dark .mark .ag{color:var(--bGlow)}
-  .sp{display:inline-block;width:.30em;flex:none}
   .xl{font-size:clamp(40px,8vw,84px)} .lg{font-size:clamp(32px,6vw,56px)}
   .gmark{font-family:var(--font),sans-serif;font-weight:700;letter-spacing:-.03em;line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
   .chev{display:inline-block;width:.58em;height:.58em;margin-right:.26em;flex:none;position:relative}
@@ -155,10 +154,6 @@
     <div>
       <div class="ctl-lbl">Tone tier</div>
       <div class="tier" id="tier"></div>
-    </div>
-    <div>
-      <div class="ctl-lbl">Spacing</div>
-      <div class="pv-seg" id="space"></div>
     </div>
   </div>
 
@@ -242,21 +237,18 @@ const FONTS=[
   {n:'Bricolage Grotesque', css:"'Bricolage Grotesque'"},
 ];
 
-let tier='light', active=0, spacing='joined';
+let tier='light', active=0;
 let activeFont="'Poppins'";
 let previewTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
 const tierEl=document.getElementById('tier');
 const fontsEl=document.getElementById('fonts');
-const spaceEl=document.getElementById('space');
 const tabsEl=document.getElementById('tabs');
 const panelEl=document.getElementById('panel');
 
 // wordmark builders (respect spacing)
-function wm(){ return spacing==='spaced'
-  ? `<span class="go">go</span><span class="sp"></span><span class="ag">agentic</span>`
-  : `<span class="go">go</span><span class="ag">agentic</span>`; }
-function gtext(){ return spacing==='spaced' ? 'go agentic' : 'goagentic'; }
+function wm(){ return `<span class="go">go</span><span class="ag">agentic</span>`; }
+function gtext(){ return 'goagentic'; }
 
 // tone buttons
 Object.keys(TIERS).forEach(t=>{
@@ -266,14 +258,6 @@ Object.keys(TIERS).forEach(t=>{
   b.innerHTML=`<span class="grad" style="background:${grad(TIERS[t][0].g,TIERS[t][0].b)}"></span><span>${m.name}<small>${m.desc}</small></span>`;
   b.onclick=()=>{tier=t;[...tierEl.children].forEach((el,n)=>el.classList.toggle('on',Object.keys(TIERS)[n]===t));buildTabs();render();};
   tierEl.appendChild(b);
-});
-
-// spacing seg
-[['joined','Joined'],['spaced','Spaced']].forEach(([v,lbl])=>{
-  const b=document.createElement('button');
-  b.textContent=lbl; b.className=(v===spacing?'on':'');
-  b.onclick=()=>{spacing=v;[...spaceEl.children].forEach(el=>el.classList.toggle('on',el.textContent===lbl));render();};
-  spaceEl.appendChild(b);
 });
 
 // font chips
@@ -321,7 +305,6 @@ function panelHTML(s){
       <div class="sys-tags">
         <span class="tag tone" style="background:${s.grad}">${m.name} tone</span>
         <span class="tag">${fontName}</span>
-        <span class="tag">${spacing}</span>
       </div>
     </div>
 
