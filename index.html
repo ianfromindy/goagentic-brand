@@ -6,7 +6,7 @@
 <title>goagentic — design system variations</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Lexend:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&family=Bricolage+Grotesque:wght@500;600;700;800&family=Poppins:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&family=Rubik:wght@500;600;700;800&family=Quicksand:wght@500;600;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Lexend:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&family=Bricolage+Grotesque:wght@500;600;700;800&family=Poppins:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&family=Rubik:wght@500;600;700;800&family=Quicksand:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Baloo+2:wght@500;600;700;800&family=DM+Sans:wght@500;600;700&family=Epilogue:wght@600;700;800&family=Chivo:wght@600;700;800&family=Archivo:wght@600;700;800&family=Hanken+Grotesk:wght@600;700;800&family=Familjen+Grotesk:wght@600;700&family=Inter:wght@600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -38,6 +38,8 @@
   .fonts button.match{border-color:rgba(80,225,180,.4)}
   .note-sm{font-size:12.5px;color:#69748F;margin-top:10px}
   .note-sm b{color:#9FE9CF;font-weight:600}
+  .fgroup{margin-bottom:13px}
+  .fgroup-lbl{font-family:'Space Grotesk';font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#5C6886;margin-bottom:8px;font-weight:600}
 
   .pv-seg{display:inline-flex;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:11px;padding:3px}
   .pv-seg button{border:none;background:transparent;color:#9AA6C2;font-family:'Space Grotesk';font-size:13px;font-weight:600;padding:8px 15px;border-radius:8px;cursor:pointer;transition:.15s}
@@ -159,8 +161,8 @@
 
   <div style="margin-top:26px">
     <div class="ctl-lbl">Typeface</div>
-    <div class="fonts" id="fonts"></div>
-    <div class="note-sm"><b>Poppins</b> &amp; <b>Nunito</b> match the logos you shared · <b>Rubik / Quicksand / Fredoka</b> are the rounded-geometric cousins.</div>
+    <div id="fonts"></div>
+    <div class="note-sm">Grouped by style. <b>Rounded &amp; friendly</b> (Poppins, Nunito) matches the logos you shared; <b>Grotesque &amp; technical</b> is the Space Grotesk family.</div>
   </div>
 
   <div class="tabs" id="tabs"></div>
@@ -221,20 +223,39 @@ const TIERS={
 };
 const TONE_META={light:{name:'Light',desc:'pastel & airy'},medium:{name:'Medium',desc:'saturated & true'},dark:{name:'Dark',desc:'deep & luminous'}};
 
-const FONTS=[
-  {n:'Poppins', css:"'Poppins'", match:1},
-  {n:'Nunito', css:"'Nunito'", match:1},
-  {n:'Rubik', css:"'Rubik'", match:1},
-  {n:'Quicksand', css:"'Quicksand'", match:1},
-  {n:'Fredoka', css:"'Fredoka'", match:1},
-  {n:'Space Grotesk', css:"'Space Grotesk'"},
-  {n:'Sora', css:"'Sora'"},
-  {n:'Outfit', css:"'Outfit'"},
-  {n:'Plus Jakarta Sans', css:"'Plus Jakarta Sans'"},
-  {n:'Lexend', css:"'Lexend'"},
-  {n:'Manrope', css:"'Manrope'"},
-  {n:'Syne', css:"'Syne'"},
-  {n:'Bricolage Grotesque', css:"'Bricolage Grotesque'"},
+const FONT_GROUPS=[
+  {label:'Rounded & friendly', fonts:[
+    {n:'Poppins', css:"'Poppins'", match:1},
+    {n:'Nunito', css:"'Nunito'", match:1},
+    {n:'Quicksand', css:"'Quicksand'"},
+    {n:'Fredoka', css:"'Fredoka'"},
+    {n:'Rubik', css:"'Rubik'"},
+    {n:'Baloo 2', css:"'Baloo 2'"},
+  ]},
+  {label:'Geometric', fonts:[
+    {n:'Sora', css:"'Sora'"},
+    {n:'Outfit', css:"'Outfit'"},
+    {n:'Plus Jakarta Sans', css:"'Plus Jakarta Sans'"},
+    {n:'Lexend', css:"'Lexend'"},
+    {n:'DM Sans', css:"'DM Sans'"},
+    {n:'Epilogue', css:"'Epilogue'"},
+  ]},
+  {label:'Grotesque & technical', fonts:[
+    {n:'Space Grotesk', css:"'Space Grotesk'"},
+    {n:'Chivo', css:"'Chivo'"},
+    {n:'Archivo', css:"'Archivo'"},
+    {n:'Hanken Grotesk', css:"'Hanken Grotesk'"},
+    {n:'Familjen Grotesk', css:"'Familjen Grotesk'"},
+  ]},
+  {label:'Humanist & clean', fonts:[
+    {n:'Manrope', css:"'Manrope'"},
+    {n:'Inter', css:"'Inter'"},
+  ]},
+  {label:'Distinctive', fonts:[
+    {n:'Syne', css:"'Syne'"},
+    {n:'Bricolage Grotesque', css:"'Bricolage Grotesque'"},
+    {n:'Unbounded', css:"'Unbounded'"},
+  ]},
 ];
 
 let tier='light', active=0;
@@ -260,13 +281,19 @@ Object.keys(TIERS).forEach(t=>{
   tierEl.appendChild(b);
 });
 
-// font chips
-FONTS.forEach(f=>{
-  const b=document.createElement('button');
-  b.textContent=f.n; b.style.fontFamily=f.css+',sans-serif';
-  b.className=(f.css===activeFont?'on ':'')+(f.match?'match':'');
-  b.onclick=()=>{activeFont=f.css;[...fontsEl.children].forEach(el=>el.classList.toggle('on',el.textContent===f.n));render();};
-  fontsEl.appendChild(b);
+// font chips (grouped by style)
+FONT_GROUPS.forEach(g=>{
+  const wrap=document.createElement('div'); wrap.className='fgroup';
+  const lab=document.createElement('div'); lab.className='fgroup-lbl'; lab.textContent=g.label;
+  const row=document.createElement('div'); row.className='fonts';
+  g.fonts.forEach(f=>{
+    const b=document.createElement('button');
+    b.textContent=f.n; b.style.fontFamily=f.css+',sans-serif'; b.dataset.css=f.css;
+    b.className=(f.css===activeFont?'on ':'')+(f.match?'match':'');
+    b.onclick=()=>{activeFont=f.css;document.querySelectorAll('#fonts button').forEach(el=>el.classList.toggle('on',el.dataset.css===activeFont));render();};
+    row.appendChild(b);
+  });
+  wrap.appendChild(lab); wrap.appendChild(row); fontsEl.appendChild(wrap);
 });
 
 function buildTabs(){
